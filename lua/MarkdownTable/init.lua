@@ -205,7 +205,7 @@ local function format_table ()
 
 end
 
-MarkdownTableFormat = function ()
+function M.MarkdownTableFormat()
 	format_table()
 
 	vim.api.nvim_echo({{"Markdown Table formatted"}}, false, {})
