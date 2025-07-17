@@ -1,4 +1,6 @@
 
+local M = {}
+
 local debug = {}
 local log = function (text)
 	table.insert(debug, text)
@@ -255,7 +257,7 @@ local function set_cell_text (lines, r, c, text)
 	return lines
 end
 
-MarkdownTableColDelete = function ()
+M.MarkdownTableColDelete = function ()
 	local current_col = column_under_cursor()
 
 	format_table()
@@ -274,7 +276,7 @@ MarkdownTableColDelete = function ()
 	vim.api.nvim_echo({{"MarkdownTable: column "..current_col.." deleted: "..column_title}}, false, {})
 end
 
-MarkdownTableColInsert = function ()
+M.MarkdownTableColInsert = function ()
 	local current_col = column_under_cursor()
 
 	format_table()
@@ -293,7 +295,7 @@ MarkdownTableColInsert = function ()
 	vim.api.nvim_echo({{"MarkdownTable: column "..current_col.." inserted"}}, false, {})
 end
 
-MarkdownTableColToggleAlign = function ()
+M.MarkdownTableColToggleAlign = function ()
 	local col = column_under_cursor()
 	local first_char, last_char, lines = get_markdown_table()
 	local max_widths, align = compute_widths_and_alignments(lines)
@@ -311,7 +313,7 @@ MarkdownTableColToggleAlign = function ()
 						.."alignment changed to "..align[col]}}, false, {})
 end
 
-MarkdownTableColSwap = function ()
+M.MarkdownTableColSwap = function ()
 	local col_1 = column_under_cursor()
 	local col_2 = col_1 - 1
 	if col_2 == 0 then return end
@@ -336,3 +338,5 @@ MarkdownTableColSwap = function ()
 							col_1.." ("..column_title_1..")"}}, false, {})
 
 end
+
+return M
